@@ -1,0 +1,83 @@
+<div class="col-md-12" style="margin-left:0%">
+  <div class="row">
+    <div class="container-fluid">
+          <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-truck"></i> |  Detalhe Embarque</h3>
+          </div>
+          <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()" novalidate>
+            <div [ngClass]="classCss" role="alert" *ngIf="message">
+              <strong>{{ message.text }}</strong>
+            </div>
+              <ul class="list-group list-group-unbordered">
+                <div class="col-sm-3">
+                <li class="list-group-item">
+                      <b>Numero :</b> <span>{{embarque.numero}}</span> 
+                </li>
+                </div>
+                <div class="col-sm-3">
+                    <li class="list-group-item">
+                          <span class="pull-center"><b>Rota :</b> <span>{{embarque.rota}}</span></span>
+                    </li>
+                    </div>
+                    <div class="col-sm-3">
+                        <li class="list-group-item">
+                              <span class="pull-right"><b>Cliente :</b> <span>{{embarque.client}}</span></span>
+                        </li>
+                        </div>
+                <li class="list-group-item">
+                  <b>Prioridade :</b> <span>{{embarque.prioridade}}</span>
+                  <span class="pull-right">
+                    <b>Criado por :</b> <span>{{embarque?.user?.email}}</span>
+                  </span>
+                </li>
+                <li class="list-group-item">
+                    <b>Status :</b> <span>{{embarque.status}}</span>
+                    <span class="pull-right">
+                      <b>Atribuído a :</b> <span>{{embarque?.assignedUser?.email}}</span>
+                    </span>
+                </li>
+                <li class="list-group-item">
+                    <b>Data :</b> <span>{{embarque.date | date:'dd/MM/yyyy'}}</span>
+                  </li>
+                <li class="list-group-item">
+                  <b>Descrição :</b> <span>{{embarque.descricao}}</span>
+                </li>
+                <li class="list-group-item">
+                   <span class="pull-right">
+                      <table class="table table-bordered">
+                          <tr>
+                            <th>Usuário que Alterou </th> 
+                            <th>Data da Alteração </th>
+                            <th>Status </th>
+                          </tr>
+                          <tr *ngFor="let change of embarque.changes">
+                              <td> {{ change?.userChange.email}}</td>
+                              <td> {{ change?.dateChangeStatus | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                              <td> {{ change?.status }}</td>
+                          </tr>  
+                             
+                      </table>    
+                    </span>
+                </li>
+              </ul>     
+            <div class="box-footer">
+              <button *ngIf="shared.user.profile == 'FINANCEIRO' && embarque.status == 'Carregado'"
+                      (click)="changeStatus('Assigned')" 
+                      class="btn btn-primary">Carregado</button>
+              <button *ngIf="shared.user.profile == 'FINANCEIRO' && (embarque.status == 'Assigned' || embarque.status == 'Rota')" 
+                      (click)="changeStatus('Rota')" 
+                      class="btn btn-primary">Em Rota</button>
+              <button *ngIf="shared.user.profile == 'FATURISTA' && embarque.status == 'Galpao'" 
+                      (click)="changeStatus('Galpao')" 
+                      class="btn btn-primary">Chegou de Viajem</button>
+              <button *ngIf="shared.user.profile == 'FATURISTA' && embarque.status == 'Acertou'" 
+                      (click)="changeStatus('Acertou')" 
+                      class="btn btn-primary">Fez Acerto</button>
+              <button *ngIf="shared.user.profile == 'FINANCEIRO' && embarque.status == 'Finalizador'"
+                      (click)="changeStatus('Finalizador')" 
+                      class="btn btn-primary">Finalizador</button>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>

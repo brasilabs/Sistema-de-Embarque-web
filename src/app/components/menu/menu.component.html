@@ -1,0 +1,53 @@
+<aside class="main-sidebar">
+    <section class="sidebar">
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="treeview" *ngIf="shared.user.profile == 'ADMIN'">
+          <a href="#">
+            <i class="fa fa-user"></i> <span>Usuario</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a [routerLink]="['/user-list']"><i class="fa  fa-users"></i> Lista dos Usuarios</a></li>
+            <li><a [routerLink]="['/user-new']"><i class="fa fa-user-plus"></i> Novo Usuario</a></li>
+          </ul>
+        </li>
+        <li class="treeview" *ngIf="shared.user.profile != 'ADMIN'">
+          <a href="#">
+            <i class="fa  fa-user-secret"></i> <span>Cliente</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a [routerLink]="['/client-list']"><i class="fa fa-users"></i> Lista dos Clientes</a></li>
+            <li *ngIf="shared.user.profile == 'FATURISTA'"><a [routerLink]="['/client-new']"><i class="fa fa-user-plus"></i> Novo Cliente</a></li>
+          </ul>
+        </li>
+        <li class="treeview" *ngIf="shared.user.profile != 'ADMIN'">
+          <a href="#">
+            <i class="fa fa-truck"></i> <span>Embarque</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a [routerLink]="['/embarque-list']"><i class="fa fa-file"></i> Lista dos Embarques</a></li>
+            <li *ngIf="shared.user.profile == 'FATURISTA'"><a [routerLink]="['/embarque-new']"><i class="fa fa-barcode"></i> Novo Embarque</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+              <i class="fa  fa-line-chart"></i> <span>Resumo</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a [routerLink]="['/summary']"><i class="fa fa-check"></i>Relatorio de Resumo</a></li>
+            </ul>
+          </li>
+      </ul>
+    </section>
+  </aside>

@@ -1,0 +1,214 @@
+<div class="col-md-12">
+<div class="container-fluid">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-truck"></i> | Novo Embarque</h3>
+        </div>
+        <form class="form-vertical " #form="ngForm" (ngSubmit)="register()" novalidate>
+            <div [ngClass]="classCss" role="alert" *ngIf="message">
+              <strong>{{ message.text }}</strong>
+            </div>
+              <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                <div [ngClass]="getFormGroupClass(rota.invalid,rota.dirty)">
+                    <label for="inputRota">Rota</label>
+                        <input type="text" 
+                                [(ngModel)]="embarque.rota"
+                                name="rota" 
+                                class="form-control" 
+                                id="inputRota" 
+                                placeholder="Rota"
+                                #rota="ngModel" 
+                                required>
+                        <span class="help-block" *ngIf="rota.invalid && rota.dirty">Rota is required</span>
+                  </div>
+                  </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                <div [ngClass]="getFormGroupClass(endereco.invalid,endereco.dirty)">
+                    <label for="inputEndereco">Endereço</label>
+                        <input type="text" 
+                                [(ngModel)]="embarque.endereco"
+                                name="endereco" 
+                                class="form-control" 
+                                id="inputEndereco" 
+                                placeholder="Endereço"
+                                #endereco="ngModel" 
+                                required>
+                        <span class="help-block" *ngIf="endereco.invalid && endereco.dirty">Endereço is required</span>
+             </div>
+             </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                <div [ngClass]="getFormGroupClass(motorista.invalid,motorista.dirty)">
+                    <label for="inputMotorista">Motorista</label>
+                            <input type="text" 
+                                  [(ngModel)]="embarque.motorista"
+                                  name="motorista" 
+                                  class="form-control" 
+                                  id="inputMotorista" 
+                                  placeholder="Motorista"
+                                  #motorista="ngModel" 
+                                  required>
+                            <span class="help-block" *ngIf="motorista.invalid && motorista.dirty">Motorista is required</span>
+                      </div>
+                      </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+            <div [ngClass]="getFormGroupClass(prioridade.invalid,prioridade.dirty)">
+                <label for="inputPrioridade">Prioridade</label>
+                      <select [(ngModel)]="embarque.prioridade" 
+                          class="form-control select2" 
+                          name="prioridade"
+                          id="inputPrioridade"
+                          #prioridade="ngModel"
+                          style="width: 100%;"
+                          required>
+                          <option>Alta</option>
+                          <option>Normal</option>
+                          <option>Baixa</option>
+                      </select>
+                    <span class="help-block" *ngIf="prioridade.invalid && prioridade.dirty">Prioridade is required</span>
+                </div>
+              </div>
+              </div>
+          </div>	
+          <div class="row">
+            <div class="col-sm-4">
+                <div [ngClass]="getFormGroupClass(client.invalid,client.dirty)">
+                    <label for="inputClient">Cliente</label>
+                      <input type="text" 
+                              [(ngModel)]="embarque.client"
+                              name="client" 
+                              class="form-control" 
+                              id="inputClient" 
+                              placeholder="Cliente"
+                              #client="ngModel" 
+                              required>
+                      <span class="help-block" *ngIf="client.invalid && client.dirty">Cliente is required</span>
+                    </div>
+              </div>
+              <div class="col-sm-4">
+                  <div [ngClass]="getFormGroupClass(vendedor.invalid,vendedor.dirty)">
+                      <label for="inputVendedor">Vendedor</label>
+                        <input type="text" 
+                                [(ngModel)]="embarque.vendedor"
+                                name="vendedor" 
+                                class="form-control" 
+                                id="inputVendedor" 
+                                placeholder="Vendedor"
+                                #vendedor="ngModel" 
+                                required>
+                        <span class="help-block" *ngIf="vendedor.invalid && vendedor.dirty">Vendedor is required</span>
+                      </div>
+              </div>
+              <div class="col-sm-2">
+                  <div [ngClass]="getFormGroupClass(romaneiolog.invalid,romaneiolog.dirty)">
+                      <label for="inputRomaneiolog">Romaneio</label>
+                        <input type="text" 
+                                [(ngModel)]="embarque.romaneiolog"
+                                name="romaneiolog" 
+                                class="form-control js-plain" 
+                                id="inputRomaneiolog" 
+                                placeholder="Romaneio do Logus"
+                                #romaneiolog="ngModel" 
+                                required>
+                        <span class="help-block" *ngIf="romaneiolog.invalid && romaneiolog.dirty">Romaneio is required</span>
+                      </div>
+              </div>
+              <div class="col-sm-2">
+                  <div [ngClass]="getFormGroupClass(tipoNfe.invalid,tipoNfe.dirty)">
+                      <label for="inputTipoNfe">Qt. Basquetas</label>
+                        <input type="text" 
+                                [(ngModel)]="embarque.tipoNfe"
+                                name="tipoNfe" 
+                                class="form-control js-plain" 
+                                id="inputTipoNfe" 
+                                placeholder="Quant Basquetas"
+                                #tipoNfe="ngModel" 
+                                required>
+                        <span class="help-block" *ngIf="tipoNfe.invalid && tipoNfe.dirty">Qt. Basquetas is required</span>
+                      </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2">
+                    <div [ngClass]="getFormGroupClass(nfeNfce.invalid,nfeNfce.dirty)">
+                        <label for="inputNfeNfce">NF-e ou NFC-e</label>
+                          <input type="text" 
+                                  [(ngModel)]="embarque.nfeNfce"
+                                  name="nfeNfce" 
+                                  class="form-control js-plain" 
+                                  id="inputNfeNfce" 
+                                  placeholder="Tipo de Venda (nf-e ou Nfc-e)"
+                                  #nfeNfce="ngModel" 
+                                  required>
+                          <span class="help-block" *ngIf="nfeNfce.invalid && nfeNfce.dirty">Nf-e ou Nfc-e is required</span>
+                        </div>
+                </div>
+                <div class="col-sm-2  form-group">
+                    <div [ngClass]="getFormGroupClass(totalNfe.invalid,totalNfe.dirty)">
+                        <label for="inputTotalNfe">Valor da Nota</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">R$</div>
+                          <input type="text" 
+                                  [(ngModel)]="embarque.totalNfe"
+                                  name="totalNfe" 
+                                  class="form-control js-decimal" 
+                                  id="inputTotalNfe" 
+                                  placeholder="Valor Total da Venda"
+                                  #totalNfe="ngModel" 
+                                  required>
+                          <span class="help-block" *ngIf="totalNfe.invalid && totalNfe.dirty">Valor da Nota is required</span>
+                        </div>
+                      </div>
+                </div>
+                <div class="col-sm-4">
+                    <div [ngClass]="getFormGroupClass(formPag.invalid,formPag.dirty)">
+                        <label for="inputFormPag">Forma de Pagamento</label>
+                          <input type="text" 
+                                  [(ngModel)]="embarque.formPag"
+                                  name="formPag" 
+                                  class="form-control" 
+                                  id="inputFormPag" 
+                                  placeholder="Forma de Pagamento"
+                                  #formPag="ngModel" 
+                                  required>
+                          <span class="help-block" *ngIf="formPag.invalid && formPag.dirty">Forma de Pagamento is required</span>
+                        </div>
+                      </div>
+                </div>
+              <div class="row">
+                  <div class="col-sm-12">
+                <div [ngClass]="getFormGroupClass(descricao.invalid,descricao.dirty)">
+                    <label for="inputDescricao">Descrição</label>
+                      <textarea [(ngModel)]="embarque.descricao"
+                              name="descricao" 
+                              rows="2"
+                              class="form-control" 
+                              id="inputDescricao" 
+                              placeholder="Descrição..."
+                              #descricao="ngModel" 
+                              required>
+                      </textarea>        
+                      <span class="help-block" *ngIf="descricao.invalid && descricao.dirty">Descrição is required</span>
+                  </div>
+              </div>
+              <br>
+              <br>
+              <br>
+              <div class="row">
+                  <div class="col-sm-12">
+                <div class="box-footer">
+                    <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Submit</button>
+                  </div>
+                </div>
+              </div>
+        </div>
+  </form>
+</div>
+</div>
+      

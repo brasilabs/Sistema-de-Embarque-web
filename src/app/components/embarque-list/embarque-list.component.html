@@ -1,0 +1,134 @@
+<div [ngClass]="classCss" role="alert" *ngIf="message">
+    <strong>{{ message.text }}</strong>
+  </div>
+  <div class="row">
+    <div class="container-fluid">
+        <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-truck"></i> |  Lista de Embarque</h3>
+            </div>
+    <div [ngClass]="classCss" role="alert" *ngIf="message">
+        <strong>{{ message.text }}</strong>
+    </div>
+        <div class="form-group" *ngIf="shared.user.profile == 'FINANCEIRO'">
+            <div class="checkbox">
+                <label>
+                  <input type="checkbox" 
+                        name="assignedToMe"
+                        id="assignedToMe"
+                        [(ngModel)]="assignedToMe">
+                        <b>Atribuído a Mim</b>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-1">
+        <div class="form-group">
+          <label for="inputNumero">Numero</label>
+            <input type="text" 
+                    [(ngModel)]="embarqueFilter.numero"
+                    name="numero" 
+                    class="form-control" 
+                    id="inputNumero">
+        </div>
+      </div>
+      <div class="col-sm-3">
+          <div class="form-group">
+              <label for="inputRota">Rota</label>
+                <input type="text" 
+                        [(ngModel)]="embarqueFilter.rota"
+                        name="rota" 
+                        class="form-control" 
+                        id="inputRota">
+              </div>
+          </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+            <label for="inputClient">Cliente</label>
+              <input type="text" 
+                      [(ngModel)]="embarqueFilter.client"
+                      name="client" 
+                      class="form-control" 
+                      id="inputClient">
+            </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+              <label for="inputStatus">Status</label>
+                <select [(ngModel)]="embarqueFilter.status" 
+                    class="form-control select2" 
+                    name="status"
+                    id="inputStatus"
+                    style="width: 100%;">
+                    <option>Carregado</option>
+                    <option>Rota</option>
+                    <option>Galpao</option>
+                    <option>Acertou</option>
+                    <option>Finalizador</option>
+                  </select>
+              </div>
+        </div>
+        <div class="col-sm-2">
+        <div class="form-group">
+            <label for="inputPrioridade" class="col-sm-2 control-label">Prioridade</label>
+              <select [(ngModel)]="embarqueFilter.prioridade" 
+                  class="form-control select2" 
+                  name="prioridade"
+                  id="inputPrioridade"
+                  style="width: 100%;">
+                  <option>Alta</option>
+                  <option>Normal</option>
+                  <option>Baixa</option>
+                </select>
+            </div>
+        </div>   
+    <div class="box-footer">
+        <button class="btn btn-info pull-left" (click)="cleanFilter()">Limpar Filtro</button>
+        <button style="margin-left: 10px" class="btn btn-info pull-right" (click)="filter()">Filtro</button>
+    </div>
+    <div class="box-body">
+      <table class="table table-bordered">
+        <tr>
+          <th>Numero</th>
+          <th>Rota</th>
+          <th>Cliente</th>
+          <th>Nº Romaneio</th>
+          <th>Nº Nf-e/Nfc-e</th>
+          <th>Total</th>
+          <th>Prioridade</th>
+          <th>Status</th>
+          <th>Faturista</th>
+          <th style="width: 10px" *ngIf="shared.user.profile == 'FATURISTA'">&nbsp;</th>
+          <th style="width: 10px" *ngIf="shared.user.profile == 'FATURISTA'">&nbsp;</th>
+          <th style="width: 10px">&nbsp;</th>
+        </tr>
+        <tr *ngFor="let embarque of listEmbarque">
+          <td>{{embarque.numero}}</td>
+          <td>{{embarque.rota}}</td>
+          <td>{{embarque.client}}</td>
+          <td>{{embarque.romaneiolog}}</td>
+          <td>{{embarque.nfeNfce}}</td>
+          <td>{{embarque.totalNfe}}</td>
+          <td>{{embarque.prioridade}}</td>
+          <td>{{embarque.status}}</td>
+          <td>{{embarque.user.email}}</td>
+          <td *ngIf="shared.user.profile == 'FATURISTA'">
+              <button class="btn btn-primary" (click)="edit(embarque.id)">Editar</button>
+          </td>
+          <td *ngIf="shared.user.profile == 'FATURISTA'">
+              <button class="btn btn-danger" (click)="delete(embarque.id)">Deleta</button>
+          </td>
+          <td><button class="btn btn-success" (click)="detail(embarque.id)">Detalhe</button></td>
+          <td><button class="btn btn-secondary" (click)="imprimir(embarque.id)">Imprimir</button></td>
+        </tr>
+      </table>
+    </div>
+    <div class="box-footer clearfix">
+      <ul class="pagination pagination-sm no-margin pull-right">
+        <li><a href="" (click)="setPreviousPage($event)">&laquo;</a></li>
+        <li *ngFor="let p of pages; let i=index">
+            <a [ngClass]="{'pagination-focus':i==page}"  href="" (click)="setPage(i,$event)">{{i+1}}</a>
+        </li>
+        <li><a href="" (click)="setNextPage($event)">&raquo;</a></li>
+      </ul>
+  </div>
+</div>
+</div>
